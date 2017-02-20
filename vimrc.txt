@@ -1,0 +1,123 @@
+se ruler 
+se ru
+se backspace=2
+se hls
+se nocscopeverbose
+se mouse=nv
+se laststatus=2
+se ic
+se ai
+se bg=dark
+se cursorline
+se autoindent
+se nu
+se tabstop=4
+se nowrap
+"se paste
+se shiftwidth=4
+se list
+se listchars=tab:┊·,trail:·
+se expandtab
+se softtabstop=4
+
+function! CenterTabNext()
+:tabnext | wincmd h | wincmd h | wincmd l
+endfunction
+
+function! CenterTabPrevious()
+:tabprevious | wincmd h | wincmd h | wincmd l
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>Plugin 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+execute pathogen#infect()
+filetype plugin indent on
+syntax on
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>Hotkey mapping 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <F1> :TlistToggle<CR>
+nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <C-Right> :call CenterTabNext() <CR>
+nnoremap <C-Left> :call CenterTabPrevious() <CR>
+nnoremap :q :qa
+nnoremap :q :qa
+nnoremap :wq :wqa
+nnoremap <S-a> <C-f>
+nnoremap <S-q> <C-b>
+nnoremap <S-Right> $
+nnoremap <S-Left> 0
+imap <S-Left> <C-o>0
+imap <S-Right> <C-o>$
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>Taglist configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let Tlist_File_Fold_Auto_Close = 1
+"let Tlist_Show_One_File = 1
+"let Tlist_Auto_Highlight_Tag = 1
+"let Tlist_WinWidth = 22
+"let Tlist_Auto_Open=1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>NERDTree configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDTreeeShowBookmarks = 1
+let NERDTreeWinSize= 18
+"let NERDTreeMapOpenInTab='<ENTER>'
+"let NERDTreeWinPos = "right"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>Open NERDTree and Tlist when open tab
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufRead * NERDTreeMirror
+"autocmd BufRead * TlistOpen
+"autocmd TabEnter * TlistOpen
+"autocmd TabEnter * NERDTreeMirror
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>Move cursor to the opened file
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd w 
+"autocmd VimEnter * wincmd w | wincmd w
+"autocmd VimEnter * TlistOpen
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>vertical line indentation
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:indentLine_color_term =14
+let g:indentLine_color_gui = '#09AA08'
+let g:indentLine_char = '┊'
+let g:indentLine_color_tty_light = 4 " (default: 4)
+let g:indentLine_color_dark = 1 " (default: 2)
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>SuperTab
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
+let g:SuperTabContextDefaultCompletionType = "<c-p>"
+let g:SuperTabLongestHighlight = 1
+let g:SuperTabLongestEnhanced = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>SuperTab
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let delimitMate_expand_cr = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>Ctrlp: a fuzzy finder
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use <leader>t to open ctrlp
+let g:ctrlp_map = '<leader>t'
+" Ignore these directories
+set wildignore+=*/build/**
+" disable caching
+let g:ctrlp_use_caching=0
